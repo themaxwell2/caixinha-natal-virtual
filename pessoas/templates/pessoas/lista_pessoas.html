@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Escolha quem deseja presentear | Caixinha de Natal Virtual{% endblock %}
+
+{% block content %}
+    <div class="pagina-inicial">
+        <section class="hero" aria-labelledby="titulo-boas-vindas">
+            <header class="cabecalho">
+                <a class="marca" href="#inicio" aria-label="Caixinha de Natal Virtual, início">
+                    <span class="marca__simbolo" aria-hidden="true">✦</span>
+                    <span>Caixinha <span class="marca__destaque">de Natal</span></span>
+                </a>
+                <span class="cabecalho__selo">Um gesto de carinho</span>
+            </header>
+
+            <div class="hero__conteudo" id="inicio">
+                <div class="hero__texto">
+                    <p class="sobretitulo">Bem-vindo à Caixinha de Natal Virtual</p>
+                    <h1 id="titulo-boas-vindas">Um gesto de carinho pode iluminar o Natal.</h1>
+                    <p class="hero__descricao">
+                        Escolha uma pessoa e compartilhe o espírito natalino em um gesto feito com carinho.
+                    </p>
+                    <a class="botao-conhecer" href="#pessoas">
+                        Conhecer as pessoas
+                        <span aria-hidden="true">↓</span>
+                    </a>
+                </div>
+
+                <div
+                    class="cena-natalina"
+                    id="cena-natalina"
+                    role="img"
+                    aria-label="Cena natalina decorativa com árvore e presentes"
+                >
+                    <div class="cena-natalina__luz" aria-hidden="true"></div>
+                    <div class="cena-natalina__estrela cena-natalina__estrela--uma" aria-hidden="true">✦</div>
+                    <div class="cena-natalina__estrela cena-natalina__estrela--duas" aria-hidden="true">✧</div>
+                    <div class="cena-natalina__arvore" aria-hidden="true"></div>
+                    <div class="cena-natalina__tronco" aria-hidden="true"></div>
+                    <div class="cena-natalina__presente cena-natalina__presente--um" aria-hidden="true"></div>
+                    <div class="cena-natalina__presente cena-natalina__presente--dois" aria-hidden="true"></div>
+                    <div class="cena-natalina__chao" aria-hidden="true"></div>
+                    <p class="cena-natalina__legenda" aria-hidden="true">Natal é tempo de compartilhar</p>
+                </div>
+            </div>
+            <div class="hero__linha" aria-hidden="true"></div>
+        </section>
+
+        <section class="secao-pessoas" id="pessoas" aria-labelledby="titulo-lista-pessoas">
+            <header class="secao-pessoas__cabecalho">
+                <p class="sobretitulo">Um presente de cada vez</p>
+                <h2 id="titulo-lista-pessoas">Escolha quem deseja presentear</h2>
+                <p>Conheça as pessoas participantes da Caixinha de Natal.</p>
+            </header>
+
+            {% if pessoas %}
+                <div class="lista-pessoas">
+                    {% for pessoa in pessoas %}
+                        <article class="cartao-pessoa">
+                            <span class="cartao-pessoa__detalhe" aria-hidden="true">✦</span>
+                            <div class="cartao-pessoa__conteudo">
+                                <span class="cartao-pessoa__rotulo">Com carinho para</span>
+                                <h3>{{ pessoa.nome }}</h3>
+                            </div>
+                            <span class="cartao-pessoa__brilho" aria-hidden="true"></span>
+                        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <p class="lista-vazia" role="status">
+                    No momento, não há pessoas disponíveis. Volte em breve para conferir as novidades.
+                </p>
+            {% endif %}
+        </section>
+
+        <footer class="rodape">
+            <span class="rodape__simbolo" aria-hidden="true">✦</span>
+            <p>Caixinha de Natal Virtual</p>
+        </footer>
+    </div>
+{% endblock %}
+
+{% block extra_js %}
+    <script
+        type="module"
+        src="{% static 'js/natal/main.js' %}"
+        onerror="console.error('Falha ao carregar os módulos da cena Three.js:', event)"
+    ></script>
+{% endblock %}
